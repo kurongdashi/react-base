@@ -12,18 +12,21 @@
 </body>
 <script type="text/babel">
     function Message(props) {
-            const names=props.list;
 
-           const listDom=names.map((num)=>{
+            const names=props.number;
 
+           const listDom=names.map((num) => {
                 <li key={num.toString()}>{num}</li>
         });
+
+
         return (<ul>{listDom}</ul>);
     }
 
     //调用render时，会自动调用组件的render()
-    const list=['zhangsan','lisi','wuwang','zhaoliu'];
-    ReactDOM.render(<Message list={list} />,document.getElementById(
+    // const list=['zhangsan','lisi','wuwang','zhaoliu'];
+    const number=[1,2,2,3];
+    ReactDOM.render(<Message number={number} />,document.getElementById(
         'app'
     ));
 
