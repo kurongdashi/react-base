@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    class Message extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={title:'状态1',name:props.name,show:true};
+        }
+
+        show=()=>{
+            this.setState({show:true})
+        }
+        hide=()=>{
+            this.setState({show:false})
+        }
+
+        //继承后
+        render(){
+            if(this.state.show){
+                //如果return null 则模版隐藏
+                return (<div>
+                        <h1 onClick={this.hide}>{this.state.title}</h1>
+                        <div>{this.state.name}</div>
+                    </div>
+                );
+            }else{
+                return (<div>
+                    <h1 onClick={this.show}>ok</h1>
+                    <div>xianshi</div>
+                </div>)
+            }
+        }
+        //组件挂载，钩子
+    }
+
+    //调用render时，会自动调用组件的render()
+    ReactDOM.render(<Message name="zhangsan 的测试" />,document.getElementById(
+        'app'
+    ));
+
+
+
+</script>
+</html>

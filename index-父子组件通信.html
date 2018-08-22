@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+   class Name extends React.Component{
+       // 父子组件的通信，是父组件传入回调函数到子组件中。
+       render(){
+           return (<div>
+               <button onClick={this.props.callback}>{this.props.name}</button>
+           </div>);
+       }
+   }
+   class Person extends React.Component{
+
+       constructor(){
+           super();
+           this.state={name:'我是张三'}
+           //一定要绑定this,或者使用箭头函数绑定this
+           this.show=this.show.bind(this);
+       }
+       show(){
+           console.log(this.state.name)
+       }
+       render(){
+           return (
+               <Name callback={this.show} name={this.state.name}></Name>
+           );
+       }
+   }
+   ReactDOM.render(
+       <Person></Person>,
+       document.getElementById('app')
+   );
+
+
+</script>
+</html>

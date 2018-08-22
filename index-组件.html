@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+
+    //1组件类，命名方式和java类一样首字母大小，驼峰
+    function HeaderMessage (prop){
+        //3 组件参数，在类中通过prop固定形参获取，在模版引擎中体现
+        return <h1>这是{prop.title}，header组件</h1>
+    }
+    //2组件封装，(将类名写标签名)
+    //3 组件参数，在组件中，通过标签属性的方式体现,注意如果html保留字(原生属性)class,和for
+    const header= <HeaderMessage  title="zhangsan"/>;
+    ReactDOM.render(
+        header,
+        document.getElementById('app'));
+
+    //4复合组件，将多个组件包装到一个组件中
+
+    function Zujian1() {
+        return <div>组件1</div>
+    }
+    function Zujian2() {
+        return <div>组件2</div>
+    }
+    function Zujian3() {
+        return <div>组件3</div>
+    }
+
+    function ZujianHe() {
+        //复合组件将多个组件写一起就行
+        return <div>
+            <Zujian1></Zujian1>
+            <Zujian2></Zujian2>
+            <Zujian3></Zujian3>
+        </div>
+    }
+    //DOM参数，可以是封装的组件
+    ReactDOM.render(
+        <ZujianHe />,
+        document.getElementById('app'));
+
+</script>
+</html>
