@@ -12,40 +12,68 @@
 </body>
 <script type="text/babel">
    class Name extends React.Component{
+        constructor(props){
+            super(props);
+            this.change=this.change.bind(this);
+        }
        // 父子组件的通信，是父组件传入回调函数到子组件中。
+       change(e){
+           this.props.call1(e.target.value);
+       }
        render(){
+          const val=this.props.val;
            return (<div>
-               <button onClick={this.props.callback}>{this.props.name}</button>
+              姓名： <input type="text" onChange={this.change} value={val}></input>
            </div>);
        }
    }
    class Address extends React.Component{
+       constructor(props){
+           super(props);
+           this.change=this.change.bind(this);
+       }
        // 父子组件的通信，是父组件传入回调函数到子组件中。
+       change(e){
+           this.props.call2(e.target.value);
+       }
        render(){
+           const val=this.props.val;
            return (<div>
-               <input >{this.props.address}</input>
+             地址：  <input type="text" onChange={this.change} value={val}></input>
            </div>);
        }
    }
    class Person extends React.Component{
 
-       constructor(){
-           super();
-           this.state={name:'我是张三'}
+       constructor(props){
+           super(props);
+           //初始化时都为空
+           this.state={name:'',address:''};
            //一定要绑定this,或者使用箭头函数绑定this
-           this.show=this.show.bind(this);
+           this.call1=this.call1.bind(this);
+           this.call2=this.call2.bind(this);
        }
-       show(){
-           console.log(this.state.name)
+       call1(v){
+        setState({name:v})
        }
+
+       call2(v){
+           setState({address:v})
+       }
+
        render(){
+
            return (
-               <Name callback={this.show} name={this.state.name}></Name>
+               <div>
+                   <Name call1={this.call1} val={name}></Name>
+                   <Address call2={this.call2} val={address}></Address>
+               </div>
            );
        }
    }
    ReactDOM.render(
-       <Person></Person>,
+       <Person>
+       </Person>,
        document.getElementById('app')
    );
 

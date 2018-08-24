@@ -12,23 +12,39 @@
 </body>
 <script type="text/babel">
     function Message(props) {
-
-            const names=props.number;
-
-           const listDom=names.map((num) => {
-                <li key={num.toString()}>{num}</li>
+        //使用遍历生成列表，然后添加到组件中，实现组件列表
+           const listDom=props.names.map((num) => {
+               return <li key={num.toString()}>{num}</li>
         });
 
-
-        return (<ul>{listDom}</ul>);
+        return <ul>{listDom}</ul>;
     }
 
-    //调用render时，会自动调用组件的render()
-    // const list=['zhangsan','lisi','wuwang','zhaoliu'];
-    const number=[1,2,2,3];
-    ReactDOM.render(<Message number={number} />,document.getElementById(
+    // 调用render时，会自动调用组件的render()
+    const list=['zhangsan','lisi','wuwang','zhaoliu'];
+
+
+
+    ReactDOM.render(
+        <Message names={list}></Message>
+        ,document.getElementById(
         'app'
     ));
+
+    //--------jsx使用模版引擎-------------
+
+    // const number=[1,2,3,4];
+    // ReactDOM.render(
+    //     <ul>
+    //         <li>123</li>
+    //         {number.map((num)=>{
+    //            return <li key={num}>{num}</li>
+    //         })}
+    //     </ul>
+    //
+    //     ,document.getElementById(
+    //     'app'
+    // ));
 
 
 
