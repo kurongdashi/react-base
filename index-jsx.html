@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    // jsx 语法，是React.createElement()的语法糖
+    // class, 等html保留字，不可使用，只能变通使用 className
+    // {{}} 双大括号解析为字符串
+    //{} 内不能使用if for 他是javascript的保留字
+
+    ReactDOM.render(<div style={{"color":"#f00"}}>ceshi</div>,document.getElementById(
+        'app'
+    ));
+</script>
+</html>
