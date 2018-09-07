@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react-表单</title>
+</head>
+<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+
+
+   class Person extends React.Component{
+
+       constructor(){
+           super();
+           this.state={
+               name:'',
+               address:'深圳'
+           }
+       }
+       //使用event.target 来获取元素的value,实现双向数据绑定
+       name(e){
+           let key=null;
+           if(e.target.name=='name'){
+               this.setState({name:e.target.value})
+           }else{
+               this.setState({address:e.target.value})
+           }
+
+       }
+
+       //react 是单向数据绑定，so
+       render(){
+           let address=['上海','北京','广州','深圳','重庆'];
+           return (
+               <div>
+                   <form action="">
+                       <div>
+                           <label >姓名</label>
+                           <input type="text" value={this.state.name} name="name" onChange={this.name.bind(this)}/>
+                           <span>* {this.state.name}</span>
+                       </div>
+                       {/* jsx 注释
+                            select中选中，通过设置value实现，不通过selected属性实现
+                       */}
+                       <div>
+                           <label >地址</label>
+                           <select name="address" id="" onChange={this.name.bind(this)} value={this.state.address} style={{display:"inline-block",'width':"100px"}}>
+                               {address.map((item,k)=>{
+                                   return <option value={item} key={k} >{item}</option>;
+                               })}
+                           </select>
+                           <span>* {this.state.address}</span>
+                       </div>
+
+                   </form>
+
+               </div>
+           );
+       }
+   }
+   ReactDOM.render(
+       <Person></Person>,
+       document.getElementById('app')
+   );
+
+
+</script>
+</html>

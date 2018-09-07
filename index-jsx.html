@@ -12,9 +12,8 @@
 </body>
 <script type="text/babel">
     // jsx 语法，是React.createElement()的语法糖
-    // class, 等html保留字，不可使用，只能变通使用 className
-    // {{}} 双大括号解析为字符串
-    //{} 内不能使用if for 他是javascript的保留字
+    //1. class,for 等html保留字，不可使用，只能变通使用 className
+    //2.  {} 是jsx开始 {{}} 双大括号，内部{}可以写字符串解析为字符串
 
     ReactDOM.render(<div style={{"color":"#f00"}}>ceshi</div>,document.getElementById(
         'app'

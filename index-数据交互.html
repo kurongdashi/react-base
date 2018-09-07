@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+
+
+   class Person extends React.Component{
+
+       constructor(){
+           super();
+           this.state={name:'我是张三',data:[]}
+
+           //一定要绑定this,或者使用箭头函数绑定this
+           // this.show=this.show.bind(this);
+       }
+       getData(){
+           let that=this;
+           let url='https://api.github.com/users/octocat/gists';
+           //react 数据交互使用的是jquery 的方式
+           $.get(url,function (data) {
+                  console.log(data);
+                  console.log(this);
+                that.setState({data:data})
+
+           });
+       }
+       //ref相当于个组件中的标签，或者组件，打一个引用标记，通过改标记找到对应DOM
+       render(){
+           return (
+               <div>
+                   <button onClick={this.getData.bind(this)} ref="div" >点击发送请求</button>
+                   <div>{this.state.data.map(function (item,key) {
+                       return <Item obj={item} key={key}></Item>;
+                   })}</div>
+               </div>
+           );
+       }
+   }
+   class Item extends React.Component{
+       constructor(props){
+           super(props);
+       }
+       render(){
+           return (<div>
+               <p>{this.props.obj.comments}</p>
+               <p>{this.props.obj.comments_url}</p>
+           </div>);
+       }
+   }
+   ReactDOM.render(
+       <Person></Person>,
+       document.getElementById('app')
+   );
+
+
+</script>
+</html>
